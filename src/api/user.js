@@ -1,7 +1,7 @@
 import { firebaseConfig } from "../../firebase-config";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection, getDocs, updateDoc, doc } from "firebase/firestore";
 
 const TEMPLATE_USER = {
     name: "New User",
@@ -43,18 +43,21 @@ export async function login(email, password) {
     const auth = getAuth();
     const promise = () =>
         new Promise((resolve, reject) => {
-            signInWithEmailAndPassword(auth, email, password)
+            signInWithEmailAndPassword(auth, email.trim(), password)
                 .then((userCredential) => resolve(userCredential))
                 .catch((error) => resolve(error));
         });
     const userCredential = await promise();
     const errorMessage = RESPONSE_CODES[userCredential.code];
+    console.log(userCredential);
     // get data of user
     let user = {};
     if (!!userCredential.user) {
         user = await getUserById(userCredential.user.uid);
-        if (!Object.entries(user).length)
+        if (!Object.entries(user).length) {
+            await logout();
             return { isAuthenticated: false, message: "Este usuario no tiene informacion, contactese con el administrador", user: null };
+        }
     }
     // ? Quemo los datos aqui por ahora
     return {
@@ -112,4 +115,12 @@ export async function getUserById(id) {
         }
     });
     return user;
+}
+
+export async function updateUser(id, data) {
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    await updateDoc(doc(db, "users", id), {
+        ...data,
+    });
 }

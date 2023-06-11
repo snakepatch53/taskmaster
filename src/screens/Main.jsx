@@ -8,6 +8,7 @@ import { StatusBar, Text } from "react-native";
 import Navbar from "../components/Navbar";
 import Tasks from "./Tasks";
 import Loading from "../components/Loading";
+import Profile from "./Profile";
 
 export default function Main() {
     const { session } = useContext(SessionContext);
@@ -30,7 +31,7 @@ export default function Main() {
                     <Routes>
                         <Route path="/home" exact element={<Home />} />
                         <Route path="/tasks" exact element={<Tasks />} />
-                        <Route path="/profile" exact element={<Text>Profile</Text>} />
+                        <Route path="/profile" exact element={<Profile />} />
                     </Routes>
                     <Navbar />
                 </NativeRouter>

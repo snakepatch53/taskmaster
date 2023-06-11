@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     float_button: {
         position: "absolute",
         bottom: 20,
-        right: 20,
+        left: 20,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

@@ -81,5 +81,15 @@ export function useTasks() {
         setTask(null);
     };
 
-    return { mode, task, tasks, changeTaskState, addTask, openForm, openDelete, deleteTask, cancelOperation };
+    return {
+        mode,
+        task,
+        tasks: tasks.sort((a, b) => (a.isDone === b.isDone ? 0 : a.isDone ? 1 : -1)),
+        changeTaskState,
+        addTask,
+        openForm,
+        openDelete,
+        deleteTask,
+        cancelOperation,
+    };
 }

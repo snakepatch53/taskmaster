@@ -1,43 +1,45 @@
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { KeyboardAvoidingView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { useTaskForm } from "../hooks/useTaskForm";
 
 export default function TaskForm({ ...props }) {
     const { name, setName, description, setDescription, message, handleSubmit, cancelOperation, descriptionRef } = useTaskForm({ ...props });
     return (
-        <View style={styles.container}>
-            <KeyboardAvoidingView style={styles.keyboard_container}>
-                <Text style={styles.title}>TaskForm</Text>
-                <Text style={styles.input_label}>Name:</Text>
-                <TextInput
-                    returnKeyType="next"
-                    onSubmitEditing={() => descriptionRef.current.focus()}
-                    style={styles.input}
-                    placeholder="Do werever task.."
-                    value={name}
-                    onChangeText={setName}
-                />
-                <Text style={styles.input_label}>Description: </Text>
-                <TextInput
-                    ref={descriptionRef}
-                    style={[styles.input, styles.input_textarea]}
-                    placeholder="Do werever task with whoever.."
-                    multiline={true}
-                    numberOfLines={4}
-                    value={description}
-                    onChangeText={setDescription}
-                />
-                <Text style={styles.message}>{message}</Text>
-                <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                    <Text style={styles.button_text}>Save</Text>
-                    <Icon style={styles.button_icon} name="save" />
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.button, styles.button_cancel]} onPress={cancelOperation}>
-                    <Text style={styles.button_text}>Cancel</Text>
-                    <Icon style={styles.button_icon} name="times" />
-                </TouchableOpacity>
-            </KeyboardAvoidingView>
-        </View>
+        <ScrollView>
+            <View style={styles.container}>
+                <KeyboardAvoidingView style={styles.keyboard_container}>
+                    <Text style={styles.title}>TaskForm</Text>
+                    <Text style={styles.input_label}>Name:</Text>
+                    <TextInput
+                        returnKeyType="next"
+                        onSubmitEditing={() => descriptionRef.current.focus()}
+                        style={styles.input}
+                        placeholder="Do werever task.."
+                        value={name}
+                        onChangeText={setName}
+                    />
+                    <Text style={styles.input_label}>Description: </Text>
+                    <TextInput
+                        ref={descriptionRef}
+                        style={[styles.input, styles.input_textarea]}
+                        placeholder="Do werever task with whoever.."
+                        multiline={true}
+                        numberOfLines={4}
+                        value={description}
+                        onChangeText={setDescription}
+                    />
+                    <Text style={styles.message}>{message}</Text>
+                    <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+                        <Text style={styles.button_text}>Save</Text>
+                        <Icon style={styles.button_icon} name="save" />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.button, styles.button_cancel]} onPress={cancelOperation}>
+                        <Text style={styles.button_text}>Cancel</Text>
+                        <Icon style={styles.button_icon} name="times" />
+                    </TouchableOpacity>
+                </KeyboardAvoidingView>
+            </View>
+        </ScrollView>
     );
 }
 
