@@ -49,7 +49,6 @@ export async function login(email, password) {
         });
     const userCredential = await promise();
     const errorMessage = RESPONSE_CODES[userCredential.code];
-    console.log(userCredential);
     // get data of user
     let user = {};
     if (!!userCredential.user) {
