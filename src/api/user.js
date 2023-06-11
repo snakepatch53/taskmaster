@@ -60,7 +60,10 @@ export async function login(email, password) {
     return {
         isAuthenticated: !!userCredential.user,
         message: errorMessage,
-        user,
+        user: {
+            ...user,
+            id: userCredential.user.uid,
+        },
     };
 }
 
@@ -78,7 +81,10 @@ export async function isAuth() {
     let user = await getUserById(auth.currentUser.uid);
     return {
         isAuthenticated: !!auth.currentUser,
-        user,
+        user: {
+            ...user,
+            id: auth.currentUser.uid,
+        },
     };
 }
 

@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import { SessionContext } from "../context/session";
 
 export default function Home() {
-    const { logout, session } = useContext(SessionContext);
+    const { session } = useContext(SessionContext);
     return (
         <View
             style={{
@@ -20,13 +20,18 @@ export default function Home() {
                     fontSize: 30,
                     fontWeight: "bold",
                     marginBottom: 30,
+                    textAlign: "center",
                 }}
             >
-                Home. Hola {session.name}, bienvenido.
+                Hola {session.name}, bienvenido.
             </Text>
-            <TouchableOpacity onPress={logout}>
-                <Text>Logout</Text>
-            </TouchableOpacity>
+            <Image
+                source={require("../../assets/waving.png")}
+                style={{
+                    height: 600,
+                    objectFit: "contain",
+                }}
+            />
         </View>
     );
 }

@@ -1,7 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
 import { Image, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { SessionContext } from "../context/session";
-import { getAllUsers } from "../api/user";
 import { useLogin } from "../hooks/useLogin";
 
 export default function Login() {
@@ -55,7 +52,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         padding: 30,
-        backgroundColor: "#E9EEEE",
         height: "100%",
     },
     imageLogo: {
